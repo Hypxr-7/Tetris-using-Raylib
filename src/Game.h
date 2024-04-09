@@ -8,6 +8,8 @@
 #include "Block.h"
 #include "Grid.h"
 
+#include <iostream>
+
 class Game {
 private:
     int cellSize;
@@ -16,17 +18,20 @@ private:
     int screenWidth;
     int screenHeight;
     std::chrono::steady_clock::time_point lastCall;
-//    int64_t elapsedTime;
+    int interval;
+    std::mt19937 randomGenerator;
+    std::uniform_int_distribution<int> distribution;
     Grid grid;
     std::vector<int> blockIDList;
     Block currentBlock;
     Block nextBlock;
+
     Block InitializeBlock();
     void Rotate();
     void MoveLeft();
     void MoveRight();
     void MoveDown();
-    bool CheckElapsedTime(int interval);
+    bool CheckElapsedTime();
     bool OutOfBounds();
     void LockBlock();
     bool BottomReached();

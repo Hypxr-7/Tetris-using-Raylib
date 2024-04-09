@@ -1,8 +1,9 @@
 #include "Block.h"
 
-Block::Block(int id_, int s) : id(id_), rotationState(0), cellSize(s) {
+Block::Block(int id_, int s) : id(id_),
+                               rotationState(0),
+                               cellSize(s) {
     // x = column and y = row for this class
-
     assert(id >= 1 && id <= 7);  // invalid ID passed
 
     if (id == 1) { // O block
@@ -64,20 +65,6 @@ Block::Block(int id_, int s) : id(id_), rotationState(0), cellSize(s) {
 void Block::Draw() {
     std::vector<Vector2> tiles = blockCells[rotationState];
     for (Vector2 currentCell : tiles)
-        DrawRectangle((position.x + currentCell.x) * cellSize + 1, (position.y + currentCell.y) * cellSize + 1, cellSize - 1, cellSize - 1, color);
+        DrawRectangle(int(position.x + currentCell.x) * cellSize + 1, int(position.y + currentCell.y) * cellSize + 1, cellSize - 1, cellSize - 1, color);
 }
 
-std::vector<Vector2> Block::GetLowestCell() {
-    int currentLowest = -1;
-
-    for (auto cell : blockCells[rotationState])
-        if (cell.y > currentLowest)
-            currentLowest = cell.y;
-
-    std::vector<Vector2> temp;
-    for (auto cell : blockCells[rotationState])
-        if (cell.y == currentLowest)
-            temp.push_back(cell);
-
-    return temp;
-}

@@ -9,6 +9,7 @@ add_executable(Tetris-using-Raylib
         src/main.cpp
         src/Game.cpp
         src/Grid.cpp
-        src/Block.cpp)
+        src/Block.cpp
+)
 
 target_link_libraries(Tetris-using-Raylib raylib)

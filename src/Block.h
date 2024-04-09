@@ -15,9 +15,9 @@ public:
     Vector2 position;
     int rotationState;
     std::map<int, std::vector<Vector2>> blockCells;
+
     Block(int id, int s);
     void Draw();
-    std::vector<Vector2> GetLowestCell();
 };
 
 
