@@ -12,4 +12,6 @@ add_executable(Tetris-using-Raylib
         src/Block.cpp
 )
 
+configure_file(assets/bgm/bgm-track-1.mp3 assets/bgm/bgm-track-1.mp3 COPYONLY)
+
 target_link_libraries(Tetris-using-Raylib raylib)

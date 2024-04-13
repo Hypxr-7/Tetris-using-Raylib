@@ -1,14 +1,9 @@
 # ninja log v5
+2	629	7347464261857709	build.ninja	54057f02bdcb64fd
 8	1221	7341304062802996	CMakeFiles/Tetris-using-Raylib.dir/main.cpp.obj	5d04233aa7cb6622
-2	289	7344047040690102	build.ninja	54057f02bdcb64fd
-2784	2973	7344039564289206	Tetris-using-Raylib.exe	9afa847e519e1574
-10	2595	7344037959534860	CMakeFiles/Tetris-using-Raylib.dir/src/main.cpp.obj	6d54b16d8b682a9e
-19	1238	7344036329263543	CMakeFiles/Tetris-using-Raylib.dir/src/Block.cpp.obj	883092943d56676
-6	2783	7344039562452620	CMakeFiles/Tetris-using-Raylib.dir/src/Game.cpp.obj	67202b2bbbccd3f4
-23	878	7343624299644523	CMakeFiles/Tetris-using-Raylib.dir/src/Grid.cpp.obj	9d671ac8746bb2fc
-2	629	7344047040690102	build.ninja	54057f02bdcb64fd
+3064	3223	7347462359386869	Tetris-using-Raylib.exe	9afa847e519e1574
+9	2269	7347459387216510	CMakeFiles/Tetris-using-Raylib.dir/src/main.cpp.obj	6d54b16d8b682a9e
+10	3063	7347462357809147	CMakeFiles/Tetris-using-Raylib.dir/src/Game.cpp.obj	67202b2bbbccd3f4
 34	1216	7344047053482257	CMakeFiles/Tetris-using-Raylib.dir/src/Block.cpp.obj	883092943d56676
 22	1232	7344047053654133	CMakeFiles/Tetris-using-Raylib.dir/src/Grid.cpp.obj	9d671ac8746bb2fc
-11	2607	7344047067428116	CMakeFiles/Tetris-using-Raylib.dir/src/main.cpp.obj	6d54b16d8b682a9e
-17	3343	7344047074752041	CMakeFiles/Tetris-using-Raylib.dir/src/Game.cpp.obj	67202b2bbbccd3f4
-3343	3516	7344047076420100	Tetris-using-Raylib.exe	9afa847e519e1574
+2	793	7347464261857709	build.ninja	54057f02bdcb64fd

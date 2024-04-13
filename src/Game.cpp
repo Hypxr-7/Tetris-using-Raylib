@@ -2,7 +2,7 @@
 
 // TODO : Add UI for next Block
 // TODO : Add logic and UI for score counting
-// TODO : Add BGM and SFX
+// TODO : Add SFX
 
 Game::Game() : cellSize(30),
                rows(20),
@@ -17,15 +17,22 @@ Game::Game() : cellSize(30),
     screenWidth = cellSize * columns;
     screenHeight = cellSize * rows;
     lastCall = std::chrono::steady_clock::now();
+
     InitWindow(screenWidth, screenHeight, "Tetris");
+    InitAudioDevice();
+    music = LoadMusicStream("assets/bgm/bgm-track-1.mp3");
+
     SetTargetFPS(30);
 }
 
 Game::~Game() {
+    UnloadMusicStream(music);
+    CloseAudioDevice();
     CloseWindow();
 }
 
 void Game::Run() {
+    PlayMusicStream(music);
     while (!WindowShouldClose()){
         Update();
         BeginDrawing();
@@ -35,6 +42,7 @@ void Game::Run() {
 }
 
 void Game::Update() {
+    UpdateMusicStream(music);
     if (IsKeyPressed(KEY_UP)) Rotate();
     if (IsKeyPressed(KEY_LEFT)) MoveLeft();
     if (IsKeyPressed(KEY_RIGHT)) MoveRight();

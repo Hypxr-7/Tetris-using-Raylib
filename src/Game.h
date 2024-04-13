@@ -12,6 +12,7 @@
 
 class Game {
 private:
+    Music music{};
     int cellSize;
     int rows;
     int columns;
