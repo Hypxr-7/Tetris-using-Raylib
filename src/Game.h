@@ -4,7 +4,11 @@
 #include <raylib.h>
 #include <random>
 #include <chrono>
+#include <vector>
+#include <ranges>
+#include <string>
 #include <algorithm>
+#include <fstream>
 #include "Block.h"
 #include "Grid.h"
 
@@ -26,6 +30,7 @@ private:
     std::vector<int> blockIDList;
     Block currentBlock;
     Block nextBlock;
+    std::vector<std::string> scores;
 
     Music music;
     Font font;
@@ -41,7 +46,8 @@ private:
     bool BottomReached();
     bool BlockOverlaps();
     void AddBlockToGrid();
-    void DrawInfoDisplay() const;
+    void DrawInfoDisplay();
+    std::vector<std::string> LoadScores();
     void Draw();
     void Update();
 public:

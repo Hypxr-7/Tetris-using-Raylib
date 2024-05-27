@@ -15,7 +15,8 @@ Game::Game() : cellSize(30),
                nextBlock(InitializeBlock()),
                interval(600),
                randomGenerator(std::random_device{}()),
-               distribution(0, 6) {
+               distribution(0, 6),
+               scores(LoadScores()){
     screenWidth = cellSize * columns;
     screenHeight = cellSize * rows;
     lastCall = std::chrono::steady_clock::now();
@@ -142,16 +143,39 @@ bool Game::BlockOverlaps() {
 
 }
 
-void Game::DrawInfoDisplay() const {
+void Game::DrawInfoDisplay() {
     DrawRectangle(screenWidth, 0, infoDisplayWidth, screenHeight, DARKBLUE);
 
-
-
-    DrawTextEx(font, "NEXT BLOCK", {static_cast<float>(screenWidth + 40), 20}, 25, 1, RAYWHITE);
+    // display for next block
+    DrawTextEx(font, "NEXT BLOCK", {static_cast<float>(screenWidth + 30), 20}, 25, 1, RAYWHITE);
     DrawRectangle(screenWidth + 40, 80, 120, 120, GRAY);
 
-//    for (auto item : nextBlock.blockCells){
-//        Vector2 posn = item.second;
+    // drawing next block
+    for (auto item : nextBlock.blockCells[nextBlock.rotationState])
+        DrawRectangle(screenWidth + 40 + int(item.x) * 30, 80 + int(item.y) * 30, 30, 30, nextBlock.color);
+
+    // display for high scores
+    DrawTextEx(font, "HIGH SCORES", {static_cast<float>(screenWidth + 25), 240}, 25, 1, RAYWHITE);
+    DrawRectangle(screenWidth + 40, 280, 120, 120, GRAY);
+
+    for (int i = 0; i < 3; ++i){
+        DrawTextEx(font, scores[i].c_str(), {static_cast<float>(screenWidth + 45), static_cast<float>(280 + 40 * i)}, 25, 1, RAYWHITE);
     }
+
+}
+
+std::vector<std::string> Game::LoadScores() {
+    std::ifstream fileHandle{"assets/highscores/scores.txt"};
+    assert(fileHandle.is_open() && "File not Found");
+
+    std::vector<std::string> vec;
+    for (int i = 0; i < 3; ++i){
+        std::string line;
+        std::getline(fileHandle, line);
+        vec.push_back(line);
+    }
+    fileHandle.close();
+
+    return vec;
 }
 

@@ -43,3 +43,7 @@ if (APPLE)
     target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
     target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
 endif()
+
+configure_file(assets/bgm/bgm-track-1.mp3 assets/bgm/bgm-track-1.mp3 COPYONLY)
+configure_file(assets/fonts/SpaceMono.ttf assets/fonts/SpaceMono.ttf COPYONLY)
+configure_file(assets/highscores/scores.txt assets/highscores/scores.txt COPYONLY)
