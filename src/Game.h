@@ -12,12 +12,12 @@
 
 class Game {
 private:
-    Music music{};
     int cellSize;
     int rows;
     int columns;
     int screenWidth;
     int screenHeight;
+    int infoDisplayWidth;
     std::chrono::steady_clock::time_point lastCall;
     int interval;
     std::mt19937 randomGenerator;
@@ -26,6 +26,9 @@ private:
     std::vector<int> blockIDList;
     Block currentBlock;
     Block nextBlock;
+
+    Music music;
+    Font font;
 
     Block InitializeBlock();
     void Rotate();
@@ -38,6 +41,7 @@ private:
     bool BottomReached();
     bool BlockOverlaps();
     void AddBlockToGrid();
+    void DrawInfoDisplay() const;
     void Draw();
     void Update();
 public:

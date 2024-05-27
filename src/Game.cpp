@@ -3,10 +3,12 @@
 // TODO : Add UI for next Block
 // TODO : Add logic and UI for score counting
 // TODO : Add SFX
+// TODO: Add high score tracker
 
 Game::Game() : cellSize(30),
                rows(20),
                columns(10),
+               infoDisplayWidth(200),
                grid(rows, columns, cellSize) ,
                blockIDList({1, 2, 3, 4, 5, 6, 7}),
                currentBlock(InitializeBlock()),
@@ -17,10 +19,10 @@ Game::Game() : cellSize(30),
     screenWidth = cellSize * columns;
     screenHeight = cellSize * rows;
     lastCall = std::chrono::steady_clock::now();
-
-    InitWindow(screenWidth, screenHeight, "Tetris");
+    InitWindow(screenWidth + infoDisplayWidth, screenHeight, "Tetris");
     InitAudioDevice();
     music = LoadMusicStream("assets/bgm/bgm-track-1.mp3");
+    font = LoadFontEx("assets/fonts/SpaceMono.ttf", 64, nullptr, 0);
 
     SetTargetFPS(30);
 }
@@ -55,6 +57,7 @@ void Game::Update() {
 void Game::Draw() {
     ClearBackground(GRAY);
 
+    DrawInfoDisplay();
     grid.Draw();
     currentBlock.Draw();
 }
@@ -137,5 +140,18 @@ bool Game::BlockOverlaps() {
         return grid.grid[item.y + 1 + currentBlock.position.y][item.x + currentBlock.position.x] != 0;
     });
 
+}
+
+void Game::DrawInfoDisplay() const {
+    DrawRectangle(screenWidth, 0, infoDisplayWidth, screenHeight, DARKBLUE);
+
+
+
+    DrawTextEx(font, "NEXT BLOCK", {static_cast<float>(screenWidth + 40), 20}, 25, 1, RAYWHITE);
+    DrawRectangle(screenWidth + 40, 80, 120, 120, GRAY);
+
+//    for (auto item : nextBlock.blockCells){
+//        Vector2 posn = item.second;
+    }
 }
 
