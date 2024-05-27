@@ -16,6 +16,7 @@ private:
     void ClearRow(int row);
     void MoveRowsDown(int row, int amount);
 public:
+    int scores;
     std::vector<Color> colors;
     std::vector<std::vector<int>> grid;
 

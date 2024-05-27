@@ -32,6 +32,7 @@ Game::~Game() {
     UnloadMusicStream(music);
     CloseAudioDevice();
     CloseWindow();
+    UpdateScore();
 }
 
 void Game::Run() {
@@ -158,10 +159,15 @@ void Game::DrawInfoDisplay() {
     DrawTextEx(font, "HIGH SCORES", {static_cast<float>(screenWidth + 25), 240}, 25, 1, RAYWHITE);
     DrawRectangle(screenWidth + 40, 280, 120, 120, GRAY);
 
-    for (int i = 0; i < 3; ++i){
+    // displaying high scores from vector
+    for (int i = 0; i < 3; ++i)
         DrawTextEx(font, scores[i].c_str(), {static_cast<float>(screenWidth + 45), static_cast<float>(280 + 40 * i)}, 25, 1, RAYWHITE);
-    }
 
+
+    DrawTextEx(font, "SCORE", {static_cast<float>(screenWidth + 40), 400}, 25, 1, RAYWHITE);
+    DrawRectangle(screenWidth + 40, 440, 120, 40, GRAY);
+    std::string temp = std::to_string(grid.scores);
+    DrawTextEx(font, temp.c_str(), {static_cast<float>(screenWidth + 40), 440}, 25, 1, RAYWHITE);
 }
 
 std::vector<std::string> Game::LoadScores() {
@@ -177,5 +183,16 @@ std::vector<std::string> Game::LoadScores() {
     fileHandle.close();
 
     return vec;
+}
+
+void Game::UpdateScore() {
+    scores.push_back(std::to_string(grid.scores));
+    std::ranges::sort(scores, [](const auto& a, const auto& b){ return a > b; });
+
+    std::ofstream fileHandle{"assets/highscores/scores.txt"};
+    for (int i = 0; i < 3; ++i)
+        fileHandle << scores[i] << '\n';
+
+    fileHandle.close();
 }
 

@@ -1,6 +1,6 @@
 #include "Grid.h"
 
-Grid::Grid(int r, int c, int s) : rows(r), columns(c), cellSize(s){
+Grid::Grid(int r, int c, int s) : rows(r), columns(c), cellSize(s), scores(0){
     for (int i = 0; i < rows; ++i) {
         std::vector<int> temp;
         for (int j = 0; j < columns; ++j) {
@@ -35,6 +35,23 @@ void Grid::ClearRows() {
         else if (completedRows > 0){
             MoveRowsDown(i, completedRows);
         }
+    }
+
+    switch (completedRows) {
+        case 1:
+            scores += 40;
+            break;
+        case 2:
+            scores += 100;
+            break;
+        case 3:
+            scores += 300;
+            break;
+        case 4:
+            scores += 1200;
+            break;
+        default:
+            break;
     }
 }
 

@@ -47,7 +47,8 @@ private:
     bool BlockOverlaps();
     void AddBlockToGrid();
     void DrawInfoDisplay();
-    std::vector<std::string> LoadScores();
+    void UpdateScore();
+    static std::vector<std::string> LoadScores();
     void Draw();
     void Update();
 public:
