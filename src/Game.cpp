@@ -1,6 +1,5 @@
 #include "Game.h"
 
-// TODO : Add SFX
 
 Game::Game(int rows_, int columns_, int cellSize_, int speed_) :   cellSize(cellSize_),
                                                                    rows(rows_),
