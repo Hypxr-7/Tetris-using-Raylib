@@ -34,6 +34,7 @@ private:
     std::vector<std::string> scores;
 
     Music music;
+    Sound rowClear;
     Font font;
 
     Block InitializeBlock();

@@ -7,7 +7,7 @@ Game::Game(int rows_, int columns_, int cellSize_, int speed_) :   cellSize(cell
                                                                    columns(columns_),
                                                                    gameOver(false),
                                                                    infoDisplayWidth(200),
-                                                                   grid(rows, columns, cellSize) ,
+                                                                   grid(rows, columns, cellSize, &rowClear) ,
                                                                    blockIDList({1, 2, 3, 4, 5, 6, 7}),
                                                                    currentBlock(InitializeBlock()),
                                                                    nextBlock(InitializeBlock()),
@@ -21,6 +21,7 @@ Game::Game(int rows_, int columns_, int cellSize_, int speed_) :   cellSize(cell
     InitWindow(screenWidth + infoDisplayWidth, screenHeight, "Tetris");
     InitAudioDevice();
     music = LoadMusicStream("assets/bgm/bgm-track-1.mp3");
+    rowClear = LoadSound("assets/sfx/row-cleared.mp3");
     font = LoadFontEx("assets/fonts/SpaceMono.ttf", 64, nullptr, 0);
 
     SetTargetFPS(30);
@@ -28,6 +29,7 @@ Game::Game(int rows_, int columns_, int cellSize_, int speed_) :   cellSize(cell
 
 Game::~Game() {
     UnloadMusicStream(music);
+    UnloadSound(rowClear);
     CloseAudioDevice();
     CloseWindow();
     UpdateScore();

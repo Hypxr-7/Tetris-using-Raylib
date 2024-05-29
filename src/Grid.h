@@ -11,6 +11,7 @@ private:
     int rows;
     int columns;
     int cellSize;
+    Sound* rowClear;
 
     bool IsRowFull(int row);
     void ClearRow(int row);
@@ -20,7 +21,7 @@ public:
     std::vector<Color> colors;
     std::vector<std::vector<int>> grid;
 
-    Grid(int r, int c, int s);
+    Grid(int r, int c, int s, Sound* sfx);
     void Draw();
     void ClearRows();
 };
