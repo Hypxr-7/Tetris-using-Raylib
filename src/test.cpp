@@ -1,5 +1,5 @@
-#include "Game.h"
 #include "Launcher.h"
+#include <iostream>
 
 int main(){
     Info info;
@@ -7,10 +7,8 @@ int main(){
         Launcher launcher(&info);
         launcher.Run();
     }
+    std::cout << info.rows << " " << info.columns << ' ' << info.cellSize << ' ' << info.speed << '\n';
 
-    Game game(info.rows, info.columns, info.cellSize, info.speed);
-    game.Run();
 
     return 0;
 }
-

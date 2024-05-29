@@ -1,22 +1,20 @@
 #include "Game.h"
 
-// TODO : Add UI for next Block
-// TODO : Add logic and UI for score counting
 // TODO : Add SFX
-// TODO: Add high score tracker
 
-Game::Game() : cellSize(30),
-               rows(20),
-               columns(10),
-               infoDisplayWidth(200),
-               grid(rows, columns, cellSize) ,
-               blockIDList({1, 2, 3, 4, 5, 6, 7}),
-               currentBlock(InitializeBlock()),
-               nextBlock(InitializeBlock()),
-               interval(600),
-               randomGenerator(std::random_device{}()),
-               distribution(0, 6),
-               scores(LoadScores()){
+Game::Game(int rows_, int columns_, int cellSize_, int speed_) :   cellSize(cellSize_),
+                                                                   rows(rows_),
+                                                                   columns(columns_),
+                                                                   gameOver(false),
+                                                                   infoDisplayWidth(200),
+                                                                   grid(rows, columns, cellSize) ,
+                                                                   blockIDList({1, 2, 3, 4, 5, 6, 7}),
+                                                                   currentBlock(InitializeBlock()),
+                                                                   nextBlock(InitializeBlock()),
+                                                                   interval(speed_),
+                                                                   randomGenerator(std::random_device{}()),
+                                                                   distribution(0, 6),
+                                                                   scores(LoadScores()){
     screenWidth = cellSize * columns;
     screenHeight = cellSize * rows;
     lastCall = std::chrono::steady_clock::now();
@@ -37,7 +35,7 @@ Game::~Game() {
 
 void Game::Run() {
     PlayMusicStream(music);
-    while (!WindowShouldClose()){
+    while (!WindowShouldClose() && !gameOver){
         Update();
         BeginDrawing();
         Draw();
@@ -121,6 +119,7 @@ void Game::LockBlock() {
         AddBlockToGrid();
         currentBlock = nextBlock;
         nextBlock = InitializeBlock();
+        if (BlockOverlaps()) gameOver = true;
 
     }
 }
@@ -146,17 +145,19 @@ bool Game::BlockOverlaps() {
 
 void Game::DrawInfoDisplay() {
     DrawRectangle(screenWidth, 0, infoDisplayWidth, screenHeight, DARKBLUE);
+//    DrawRectangleRounded({static_cast<float>(screenWidth), 0, static_cast<float>(infoDisplayWidth), static_cast<float>(screenHeight)}, 0.2, 0, DARKBLUE);
 
     // display for next block
-    DrawTextEx(font, "NEXT BLOCK", {static_cast<float>(screenWidth + 30), 20}, 25, 1, RAYWHITE);
-    DrawRectangle(screenWidth + 40, 80, 120, 120, GRAY);
+    DrawTextEx(font, "NEXT BLOCK", {static_cast<float>(screenWidth + 40), 20}, 25, 1, RAYWHITE);
+//    DrawRectangle(screenWidth + 40, 80, 120, 120, GRAY);
+    DrawRectangleRounded({static_cast<float>(screenWidth + 35), 75, 125, 125}, 0.2, 0, GRAY);
 
     // drawing next block
     for (auto item : nextBlock.blockCells[nextBlock.rotationState])
         DrawRectangle(screenWidth + 40 + int(item.x) * 30, 80 + int(item.y) * 30, 30, 30, nextBlock.color);
 
     // display for high scores
-    DrawTextEx(font, "HIGH SCORES", {static_cast<float>(screenWidth + 25), 240}, 25, 1, RAYWHITE);
+    DrawTextEx(font, "HIGH SCORES", {static_cast<float>(screenWidth + 35), 240}, 25, 1, RAYWHITE);
     DrawRectangle(screenWidth + 40, 280, 120, 120, GRAY);
 
     // displaying high scores from vector
@@ -164,10 +165,10 @@ void Game::DrawInfoDisplay() {
         DrawTextEx(font, scores[i].c_str(), {static_cast<float>(screenWidth + 45), static_cast<float>(280 + 40 * i)}, 25, 1, RAYWHITE);
 
 
-    DrawTextEx(font, "SCORE", {static_cast<float>(screenWidth + 40), 400}, 25, 1, RAYWHITE);
-    DrawRectangle(screenWidth + 40, 440, 120, 40, GRAY);
+    DrawTextEx(font, "SCORE", {static_cast<float>(screenWidth + 65), 430}, 25, 1, RAYWHITE);
+    DrawRectangle(screenWidth + 40, 460, 120, 40, GRAY);
     std::string temp = std::to_string(grid.scores);
-    DrawTextEx(font, temp.c_str(), {static_cast<float>(screenWidth + 40), 440}, 25, 1, RAYWHITE);
+    DrawTextEx(font, temp.c_str(), {static_cast<float>(screenWidth + 45), 460}, 25, 1, RAYWHITE);
 }
 
 std::vector<std::string> Game::LoadScores() {

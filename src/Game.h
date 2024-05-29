@@ -21,6 +21,7 @@ private:
     int columns;
     int screenWidth;
     int screenHeight;
+    bool gameOver;
     int infoDisplayWidth;
     std::chrono::steady_clock::time_point lastCall;
     int interval;
@@ -52,7 +53,7 @@ private:
     void Draw();
     void Update();
 public:
-    Game();
+    Game(int rows_, int columns_, int cellSize_, int speed_);
     ~Game();
     void Run();
 };

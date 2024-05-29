@@ -28,6 +28,7 @@ endif()
 # Our Project
 
 add_executable(${PROJECT_NAME} src/main.cpp src/Grid.cpp src/Block.cpp src/Game.cpp)
+
 #set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} raylib)
 
@@ -47,3 +48,4 @@ endif()
 configure_file(assets/bgm/bgm-track-1.mp3 assets/bgm/bgm-track-1.mp3 COPYONLY)
 configure_file(assets/fonts/SpaceMono.ttf assets/fonts/SpaceMono.ttf COPYONLY)
 configure_file(assets/highscores/scores.txt assets/highscores/scores.txt COPYONLY)
+configure_file(assets/images/bg.png assets/images/bg.png COPYONLY)
