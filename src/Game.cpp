@@ -50,7 +50,7 @@ void Game::Update() {
     if (IsKeyPressed(KEY_LEFT)) MoveLeft();
     if (IsKeyPressed(KEY_RIGHT)) MoveRight();
     LockBlock();
-    if (IsKeyDown(KEY_DOWN)) MoveDown();
+    if (IsKeyDown(KEY_DOWN) && !BottomReached() && !BlockOverlaps()) MoveDown();
     if (CheckElapsedTime()) MoveDown();
     grid.ClearRows();
 }
