@@ -49,8 +49,8 @@ void Game::Update() {
     if (IsKeyPressed(KEY_UP)) Rotate();
     if (IsKeyPressed(KEY_LEFT)) MoveLeft();
     if (IsKeyPressed(KEY_RIGHT)) MoveRight();
-    LockBlock();
     if (IsKeyDown(KEY_DOWN) && !BottomReached() && !BlockOverlaps()) MoveDown();
+    LockBlock();
     if (CheckElapsedTime()) MoveDown();
     grid.ClearRows();
 }
